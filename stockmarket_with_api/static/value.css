@@ -1,0 +1,85 @@
+/* Basic reset */
+body, h1, p, span, a {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+/* Main content styling */
+main {
+    text-align: center;
+}
+
+.price-info {
+    font-size: 18px;
+}
+
+.price-value-container {
+    margin-bottom: 10px;
+}
+
+.price-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.price-value, .net-change, .percentage-change {
+    font-size: 22px;
+    display: block;
+    margin-top: 5px;
+}
+
+.price-value {
+    color: #2ecc71; /* Green for price */
+}
+
+.net-change {
+    color: #e74c3c; /* Red for net change */
+}
+
+.percentage-change {
+    color: #3498db; /* Blue for percentage change */
+}
+
+/* Button styling */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}

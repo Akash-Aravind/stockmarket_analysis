@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select a Stock Ticker</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Select a Stock Ticker</h1>
+        <form id="ticker-form" method="POST">
+            {% csrf_token %}
+            <select class="dropdown" name="ticker" id="ticker-select">
+                {% for ticker, name in companies.items %}
+                    <option value="{{ticker}}">{{name}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="submit-btn" id="view-price-btn">View Current Price</button>
+            <button type="submit" class="submit-btn" id="view-history-btn">View Prediction</button>
+        </form>
+        
+        <script>
+            document.getElementById('view-price-btn').addEventListener('click', function(event) {
+                event.preventDefault();
+                var ticker = document.getElementById('ticker-select').value;
+                var url = "{% url 'currentprice' 'TICKER' %}".replace('TICKER', ticker);
+                window.location.href = url;
+            });
+
+            document.getElementById('view-history-btn').addEventListener('click', function(event) {
+                event.preventDefault();
+                var ticker = document.getElementById('ticker-select').value;
+                var url = "{% url 'pricehistory' 'TICKER' %}".replace('TICKER', ticker);
+                window.location.href = url;
+            });
+        </script>
+    </div>
+</body>
+</html>

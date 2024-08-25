@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Price</title>
+    <link rel="stylesheet" href="{% static 'value.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Current Price for: {{ ticker }}</h1>
+        </header>
+        <main>
+            <div class="price-info">
+                <p>The current price for {{ ticker }} at {{time}} is:</p>
+                <div class="price-value-container">
+                    <span class="price-label">Price:</span>
+                    <span class="price-value">{{ value }}</span>
+                </div>
+                <div class="price-value-container">
+                    <span class="price-label">Net Change:</span>
+                    <span class="net-change">{{ net_change }}</span>
+                </div>
+                <div class="price-value-container">
+                    <span class="price-label">Percentage Change:</span>
+                    <span class="percentage-change">{{ percentage_change }}</span>
+                </div>
+            </div>
+            {% comment %} <a href="{% url 'select_ticker' %}" class="button">Select Another Ticker</a> {% endcomment %}
+        </main>
+    </div>
+</body>
+</html>
