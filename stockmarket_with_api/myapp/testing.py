@@ -27,7 +27,6 @@ if 0 <= selected_index < len(tickers):
     json_data = json.loads(data.decode("utf-8"))
 
     try:
-        # Extract the last sale price from the JSON object
         print(json_data)
         last_sale_price = json_data['body']['primaryData']['lastSalePrice']
         print(f"Last sale price for {selected_ticker}: {last_sale_price}")

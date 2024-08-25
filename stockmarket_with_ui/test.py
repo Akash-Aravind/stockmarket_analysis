@@ -1,10 +1,8 @@
 import http.client
 import json
 
-# Establish a connection to the Yahoo Finance API
 conn = http.client.HTTPSConnection("yahoo-finance15.p.rapidapi.com")
 
-# Define the headers with the API key and host
 headers = {
     'x-rapidapi-key': "8a4a5012f9msh121486b60fb4e3cp1dd9afjsnafde66c0eca8",
     'x-rapidapi-host': "yahoo-finance15.p.rapidapi.com"
@@ -17,7 +15,7 @@ def fetch_page(page_number):
     return json.loads(data)
 
 def main():
-    total_pages = 3  # Limit to the first 5 pages
+    total_pages = 3  
     all_tickers = []
 
     for current_page in range(1, total_pages + 1):
@@ -35,7 +33,6 @@ def main():
             print(f"Error fetching data on page {current_page}.")
             break
 
-    # Display all tickers from the first 5 pages
     print("\nAll Tickers from the first 5 pages:")
     for ticker in all_tickers:
         print(f"{ticker['symbol']} - {ticker['name']}")

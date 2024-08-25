@@ -184,7 +184,7 @@ class PriceHistoryAPIView(APIView):
             last_row = future_data.loc[date]
 
         try:
-            tomorrow_date = datetime.now() + timedelta(days=3)
+            tomorrow_date = datetime.now() + timedelta(days=1)
             datee = tomorrow_date.strftime("%Y-%m-%d")
             predicted_close_25_aug = str(future_data.loc[datee]["Close"])[:6]
         except KeyError:

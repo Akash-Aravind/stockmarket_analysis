@@ -8,7 +8,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
 
-#This function is for the path"/" i.e for the home page
 def home(request):
     top_100_companies = {
     "AAPL": "Apple Inc.",
@@ -121,8 +120,6 @@ def home(request):
 
 
 def currentprice(request, ticker):
-    # Process the ticker (e.g., fetch current price)
-    # For demonstration, we'll just pass it to the template
 
     conn = http.client.HTTPSConnection("yahoo-finance15.p.rapidapi.com")
 
@@ -140,7 +137,7 @@ def currentprice(request, ticker):
     json_data = json.loads(data.decode("utf-8"))
 
     try:
-        # Extract the last sale price from the JSON object
+
         value = json_data['body']['primaryData']['lastSalePrice']
         net_change=json_data['body']['primaryData']['netChange']
         percentage_change=json_data['body']['primaryData']['percentageChange']
@@ -158,25 +155,25 @@ def pricehistory(request, ticker):
     ticker_obj = yf.Ticker(ticker)
     history_data = ticker_obj.history(period="max")
 
-    # Ensure data is available
+
     if history_data.empty:
         return render(request, 'display_ticker.html', {'ticker': ticker, 'value': "Historical data not available"})
 
     history_data.index = pd.to_datetime(history_data.index)
     history_data = history_data.loc["1990-01-01":].copy()
 
-    # Shift 'Close' to create 'Tomorrow' and remove irrelevant columns
+
     history_data["Tomorrow"] = history_data["Close"].shift(-1)
     history_data = history_data.dropna()
 
     predictors = ["Close", "Volume", "Open", "High", "Low"]
     target = "Tomorrow"
 
-    # Train the model
+
     model = LinearRegression()
     model.fit(history_data[predictors], history_data[target])
 
-    # Predict future prices
+
     last_known_date = history_data.index[-1]
     future_dates = pd.date_range(last_known_date, periods=365, freq='B')[1:]
 
@@ -190,9 +187,8 @@ def pricehistory(request, ticker):
         last_row = future_data.loc[date]
 
     try:
-        # Get tomorrow's date dynamically
-        tomorrow_date = datetime.now() + timedelta(days=3)
-        datee = tomorrow_date.strftime("%Y-%m-%d")  # Format date as YYYY-MM-DD
+        tomorrow_date = datetime.now() + timedelta(days=1)
+        datee = tomorrow_date.strftime("%Y-%m-%d") 
         predicted_close_25_aug = str(future_data.loc[datee]["Close"])[:6]
     except KeyError:
         predicted_close_25_aug = f"Holiday on {datee} so no data"
